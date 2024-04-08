@@ -1,12 +1,6 @@
 FROM ubuntu:20.04
 RUN apt-get update
 RUN apt-get install -y openjdk-17-jdk
-RUN mkdir tomcat
-RUN apt-get install -y wget
-RUN wget https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.86/bin/apache-tomcat-9.0.86.tar.gz
-RUN tar -xvf apache-tomcat-9.0.86.tar.gz
-RUN cd  /apache-tomcat-9.0.86/webapps
-COPY ./devopsb8/Amazon1/Amazon-Web/target/Amazon.war  /apache-tomcat-9.0.86/webapps
-WORKDIR /apache-tomcat-9.0.86/
-CMD sh bin/catalina.sh run
+COPY Amazon-Core-1.0-SNAPSHOT.jar .
 EXPOSE 8080
+CMD ["java", "-jar", "Amazon-Core-1.0-SNAPSHOT.jar"]
